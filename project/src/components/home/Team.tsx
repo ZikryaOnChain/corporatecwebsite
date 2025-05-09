@@ -31,7 +31,7 @@ const Team = () => {
                         member.name === "Faraz Siddiqui" || 
                         member.name === "Muhammad Zikrya" ||
                         member.name === "Xavier Khan" ||
-                        member.name === "Ammar Ghouri"
+                        member.name === "Ammar Ghori"
                           ? "object-top" 
                           : "object-center"
                       }`}

@@ -1,8 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Mail, Phone, MapPin, MessageSquare, Building, Clock } from 'lucide-react';
 import AnimatedElement from '../AnimatedElement';
+import { useNavigate } from 'react-router-dom';
 
 const Contact = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [id]: value
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Clear form
+    setFormData({
+      name: '',
+      email: '',
+      subject: '',
+      message: ''
+    });
+    // Redirect to home page
+    navigate('/');
+  };
+
   return (
     <section id="contact" className="py-20">
       <div className="container mx-auto px-4">
@@ -28,7 +58,7 @@ const Contact = () => {
                 <h3 className="text-2xl font-bold text-[rgb(var(--cc-text-rgb))]">Send Us A Message</h3>
               </div>
               
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-gray-300 mb-2">
@@ -37,6 +67,8 @@ const Contact = () => {
                     <input
                       type="text"
                       id="name"
+                      value={formData.name}
+                      onChange={handleChange}
                       className="w-full bg-cc-bg border border-gray-700 rounded-md px-4 py-3 focus:outline-none focus:border-cc-gold transition-colors"
                       placeholder="John Doe"
                     />
@@ -49,6 +81,8 @@ const Contact = () => {
                     <input
                       type="email"
                       id="email"
+                      value={formData.email}
+                      onChange={handleChange}
                       className="w-full bg-cc-bg border border-gray-700 rounded-md px-4 py-3 focus:outline-none focus:border-cc-gold transition-colors"
                       placeholder="john@example.com"
                     />
@@ -62,6 +96,8 @@ const Contact = () => {
                   <input
                     type="text"
                     id="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
                     className="w-full bg-cc-bg border border-gray-700 rounded-md px-4 py-3 focus:outline-none focus:border-cc-gold transition-colors"
                     placeholder="How can we help you?"
                   />
@@ -73,6 +109,8 @@ const Contact = () => {
                   </label>
                   <textarea
                     id="message"
+                    value={formData.message}
+                    onChange={handleChange}
                     rows={5}
                     className="w-full bg-cc-bg border border-gray-700 rounded-md px-4 py-3 focus:outline-none focus:border-cc-gold transition-colors"
                     placeholder="Your message..."

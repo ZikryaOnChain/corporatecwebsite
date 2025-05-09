@@ -30,14 +30,14 @@ export const teamData: TeamMember[] = [
   },
   {
     id: 4,
-    name: "Usman Khan",
+    name: "Usman Rehman",
     role: "Consultant",
     bio: "Expert consultant providing strategic guidance in sales operations and business development.",
     image: "/maani.jpeg"
   },
   {
     id: 5,
-    name: "Ammar Ghouri",
+    name: "Ammar Ghori",
     role: "Consultant",
     bio: "Strategic consultant specializing in revenue optimization and sales process improvement.",
     image: "/ammar.jpeg"

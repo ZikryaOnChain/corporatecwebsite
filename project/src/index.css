@@ -15,12 +15,22 @@
   html {
     scroll-behavior: smooth;
     overflow-x: hidden;
+    background-color: #000;
   }
 
   body {
     @apply bg-cc-bg text-cc-text font-inter overflow-x-hidden;
     margin: 0;
     background: radial-gradient(circle at top, rgb(var(--cc-bg-rgb)), rgb(0, 0, 0));
+    background-color: #000;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  @supports (padding-bottom: env(safe-area-inset-bottom)) {
+    body {
+      padding-bottom: env(safe-area-inset-bottom);
+      background-color: #000;
+    }
   }
 
   h1, h2, h3, h4, h5, h6 {

@@ -1,7 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AnimatedElement from '../AnimatedElement';
+import { useNavigate } from 'react-router-dom';
 
 const CareersCTA = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    position: '',
+    message: ''
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [id]: value
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Clear form
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      position: '',
+      message: ''
+    });
+    // Redirect to home page
+    navigate('/');
+  };
+
   return (
     <section className="py-20 bg-gradient-to-b from-cc-bg to-black">
       <div className="container mx-auto px-4">
@@ -67,7 +99,7 @@ const CareersCTA = () => {
               <div className="bg-black/20 p-8 rounded-lg border border-cc-gold/20">
                 <h3 className="text-2xl font-bold mb-6 text-center text-[rgb(var(--cc-text-rgb))]">Apply Now</h3>
                 
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={handleSubmit}>
                   <div>
                     <label htmlFor="name" className="block text-[rgb(var(--cc-text-rgb))] mb-2">
                       Full Name
@@ -75,6 +107,8 @@ const CareersCTA = () => {
                     <input
                       type="text"
                       id="name"
+                      value={formData.name}
+                      onChange={handleChange}
                       className="w-full bg-cc-bg border border-gray-700 rounded-md px-4 py-3 focus:outline-none focus:border-cc-gold transition-colors"
                     />
                   </div>
@@ -86,6 +120,8 @@ const CareersCTA = () => {
                     <input
                       type="email"
                       id="email"
+                      value={formData.email}
+                      onChange={handleChange}
                       className="w-full bg-cc-bg border border-gray-700 rounded-md px-4 py-3 focus:outline-none focus:border-cc-gold transition-colors"
                     />
                   </div>
@@ -97,6 +133,8 @@ const CareersCTA = () => {
                     <input
                       type="tel"
                       id="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
                       className="w-full bg-cc-bg border border-gray-700 rounded-md px-4 py-3 focus:outline-none focus:border-cc-gold transition-colors"
                     />
                   </div>
@@ -107,6 +145,8 @@ const CareersCTA = () => {
                     </label>
                     <select
                       id="position"
+                      value={formData.position}
+                      onChange={handleChange}
                       className="w-full bg-cc-bg border border-gray-700 rounded-md px-4 py-3 focus:outline-none focus:border-cc-gold transition-colors"
                     >
                       <option value="">Select a position</option>
@@ -124,6 +164,8 @@ const CareersCTA = () => {
                     </label>
                     <textarea
                       id="message"
+                      value={formData.message}
+                      onChange={handleChange}
                       rows={4}
                       className="w-full bg-cc-bg border border-gray-700 rounded-md px-4 py-3 focus:outline-none focus:border-cc-gold transition-colors"
                     ></textarea>
